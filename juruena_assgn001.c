@@ -6,9 +6,13 @@ int main(){
 	while((choice=menu())!=0){
 		switch(choice){
 			case 1: numtowordsmain();
+			break;
 			case 2: wordstonummain();
+			break;
 			case 3: wordstocurrmain();
+			break;
 			case 4: delimmain();
+			break;
 		}
 
 	}
@@ -24,6 +28,6 @@ int menu(){
 	printf("\n[0] - EXIT");
 
 	printf("\nYour choice: ");
-	scanf("%i",&choice);
+	scanf("%d",&choice);
 	return choice;
 }

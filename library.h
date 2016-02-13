@@ -56,16 +56,14 @@ void delimmain(){
 	 
 	 printf("Enter number: ");
 	 fgets(input, sizeof(input), stdin); //gets the input 
+	 // getchar();
 	 printf("Enter delmiter: ");
 	 scanf("%c", &delim);
-	 getchar();
+	 // getchar();
 	 printf("Enter character jumps: ");
 	 scanf("%d", &jump);
 	 cnt = count(input); //counts number of charcters
-	 // printf("cnt: %d ", cnt);
-	 // printf("jump: %d ", jump);
-
-
+	 
 	int i;
 	 for (i= 1; i<cnt+1; i++){ //itirates thru the characrters of the input
 		insert(&head, temp, input[i-1]);
@@ -75,14 +73,16 @@ void delimmain(){
 	    }
 	    
 	}
+	printf("Result: \n");
 	display(head);
 		
 	free(head);
+	printf("\n\n");
 }
 
 
 void wordstocurrmain(){
-	nd *head=NULL	, *temp;
+	nd *head=NULL, *temp;
 		
 	char input[256],  inputcopy[256],  word[20],  result[20];;
 	int jump, cnt, numofDigits;
@@ -97,6 +97,10 @@ void wordstocurrmain(){
 		printf("enter words :  ");
 
 		fgets(input, sizeof(input), stdin);
+		
+		// int c;
+// while ( (c==getchar()) != EOF && c != '\n') { }
+
 		input[ strlen(input) - 1 ] = '\0';
 		strncpy ( inputcopy, input, 256);
 		printf("enter currency (JPY, UsD, PHP): ");
@@ -165,7 +169,6 @@ void wordstocurrmain(){
 					times = times +1;
 				}
 			}else if (strcmp (word, "hundred") == 0){
-				// printf("hundred diri \n");
 				times= 2;
 			}else if (strcmp (word, "million") == 0){
 				times = 6;
@@ -192,7 +195,7 @@ void numtowordsmain(){
 	 int a,b,c,d,e;
 	 int ones=66, tens=66, hund=66, thou=66, thou2=66, hthou=66, mil=66; 
 	 int n;
-	 printf("Enter the number: (Max. 5 digits) \n");
+	 printf("Enter the number without comma or space: (Max. 1000000 / One Million digits) \n");
 	 scanf("%d",&n);
 	 if(n<=1000000){
 	 	//modulo gives the rightmost number. we will start to divide the input number with the ones place
@@ -223,8 +226,6 @@ void numtowordsmain(){
 
 		  if(hthou!=66 && hthou!=0){
 			   onesf(hthou);
-			  printf("diri\n");
-
 			   printf("Hundred ");
 		  }
 
@@ -260,6 +261,7 @@ void numtowordsmain(){
 
 
 void wordstonummain(){
+
 	nd *head=NULL, *temp;
 		
 	char input[256],  inputcopy[256],  word[20],  result[20];;
@@ -340,7 +342,6 @@ void wordstonummain(){
 					times = times +1;
 				}
 			}else if (strcmp (word, "hundred") == 0){
-				// printf("hundred diri \n");
 				times= 2;
 			}else if (strcmp (word, "million") == 0){
 				times = 6;
