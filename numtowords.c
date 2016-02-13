@@ -1,3 +1,12 @@
+
+/*
+Author: Christine Mae Juruena
+Date Created: Feb 12, 2015
+Description: This program accepts a whole number from zero (0) to 1 million 
+(1000000; without commas for example: 1,000,000) and prints on screen the 
+number in word form
+*/
+
 #include <stdio.h>
 #include <math.h>
 void hundthouf(int );
@@ -5,14 +14,13 @@ void dthouf(int );
 void dthou1f(int );
 void thouf(int );
 void hundf(int );
-void tensf(int );
 void tens1f(int );
 void onesf(int );
 
 void main(){
 	 int a,b,c,d,e;
-	 int ones, tens, hund, thou, thou2, hthou, mil; 
-	 long n;
+	 int ones=66, tens=66, hund=66, thou=66, thou2=66, hthou=66, mil=66; 
+	 int n;
 	 printf("Enter the number: (Max. 5 digits) \n");
 	 scanf("%d",&n);
 	 if(n<=1000000){
@@ -42,25 +50,35 @@ void main(){
 
 		  }
 
-		  if(hthou!=0){
-		  		hundthouf(hthou);
+		  if(hthou!=66 && hthou!=0){
+			   onesf(hthou);
+			  printf("diri\n");
+
+			   printf("Hundred ");
 		  }
 
 		  if(thou2==1) {
-		  	dthou1f(thou);
+		  	tens1f(thou);
+			   printf("Thousand ");		  	
 		  }else{
 			  dthouf(thou2);
-			  thouf(thou);
+			  onesf(thou);
+			  printf("Thousand ");
 		  }
 
-		  hundf(hund);
-		  
+		  if (hund!=66 && hund!=0){
+			  onesf(hund);
+				printf("Hundred ");	  	
+		  }
+
 		  if(tens!=1){
-			   tensf(tens);
+			   dthouf(tens);
 			   onesf(ones);
 		  }
 		  if(tens==1){
 		   		tens1f(ones);
+		  }else if ( tens == 0){
+
 		  }
 	 }
 	 else{
@@ -70,32 +88,7 @@ void main(){
 	}
 
 //fxn for Hundreds
-void hundthouf(int num){
-	if(num!=0){
-	 switch(num) {
-	  case 1:  printf("One Hundred  ");
-	  break;
-	  case 2:  printf("Two Hundred  ");
-	  break;  
-	  case 3:  printf("Three Hundred  ");
-	  break;
-	  case 4:  printf("Four Hundred  ");
-	  break;
-	  case 5:  printf("Five Hundred  ");
-	  break;
-	  case 6:  printf("Six  Hundred  ");
-	  break;
-	  case 7:  printf("Seven Hundred  ");
-	  break;
-	  case 8:  printf("Eight Hundred  ");
-	  break;
-	  case 9:  printf("Nine Hundred ");
-	  break;
-	   
-	  
-	 }
-	}
-}
+
 //fxn for -ty
 void dthouf(int num){
 	 switch(num) {
@@ -118,131 +111,29 @@ void dthouf(int num){
   
 	}
 }
-//fxn for thousands
-void dthou1f(int num){
-	 switch(num) {
 
-	 case 0: printf("Ten Thousand ");
-  break;
-	 case 1: printf("Eleven Thousand ");
-  break;
-	 case 2: printf("Twelve Thousand ");
-  break;
-	 case 3: printf("Thirteen Thousand ");
-  break;
-	 case 4: printf("Forteen Thousand ");
-  break;
-	 case 5: printf("Fivteen Thousand ");
-  break;
-	 case 6: printf("Sixteen Thousand ");
-  break;
-	 case 7: printf("Seventeen Thousand ");
-  break;
-	 case 8: printf("Eighteen Thousand ");
-  break;
-	 case 9: printf("Nineteen Thousand ");
-  break;
-  
-	}
-}
 
-void thouf(int num){
- if(num!=0){
-	 switch(num) {
-
-	  case 1:  printf("One Thousand ");
-  break;
-	  case 2:  printf("Two Thousand ");
-  break;
-	  case 3:  printf("Three Thousand ");
-  break;
-	  case 4:  printf("Four Thousand ");
-  break;
-	  case 5:  printf("Five Thousand ");
-  break;
-	  case 6:  printf("Six Thousand ");
-  break;
-	  case 7:  printf("Seven Thousand ");
-  break;
-	  case 8:  printf("Eight Thousand ");
-  break;
-	  case 9:  printf("Nine Thousand ");
-  break;
-  
-	 }
-	}
-}
-void hundf(int num){
-	 if(num!=0){
-		 switch(num) {
-	  case 1:   printf("One Hundred ");
-  break;
-	  case 2:  printf("Two Hundred ");
-  break;
-	  case 3:  printf("Three Hundred ");
-  break;
-	  case 4:  printf("Four Hundred ");
-  break;
-	  case 5:  printf("Five Hundred ");
-  break;
-	  case 6:  printf("Six Hundred ");
-  break;
-	  case 7:  printf("Seven Hundred ");
-  break;
-	  case 8:  printf("Eight Hundred ");
-  break;
-	  case 9:  printf("Nine Hundred ");
-		break;
-	  
-	 }
-	}
-}
-void tensf(int num){
- if(num!=0){
-		 switch(num) {
-	  case 2:  printf("Twenty ");
-  break;
-	  case 3:  printf("Thirty ");
-  break;
-	  case 4:  printf("Forty ");
-  break;
-	  case 5:  printf("Fifty ");
-  break;
-  break;
-	  case 6:  printf("Sixty ");
-  break;
-  break;
-	  case 7:  printf("Seventy ");
-  break;
-	  case 8:  printf("Eighty ");
-  break;
-	  case 9:  printf("Ninety ");
-  break;
-  
-	 }
-	}
-}
 void tens1f(int num){
 	switch(num) {
-		case 0: printf("Ten\n");
+		case 0: printf("Ten ");
 	  break;
-			 case 1: printf("Eleven\n");
+			 case 1: printf("Eleven ");
 	  break;
-			 case 2: printf("Twelve\n");
+			 case 2: printf("Twelve ");
 	  break;
-			 case 3: printf("Thirteen\n");
+			 case 3: printf("Thirteen ");
 	  break;
-			 case 4: printf("Fourteen\n");
+			 case 4: printf("Fourteen ");
 	  break;
-			 case 5: printf("Fifteen\n");
+			 case 5: printf("Fifteen ");
 	  break;
-			 case 6: printf("Sixteen\n");
+			 case 6: printf("Sixteen ");
 	  break;
-			 case 7: printf("Seventeen\n");
+			 case 7: printf("Seventeen ");
 	  break;
-			 case 8: printf("Eighteen\n");
+			 case 8: printf("Eighteen ");
 	  break;
-			 case 9: printf("Nineteen\n");
+			 case 9: printf("Nineteen ");
 	  break;
   
 	}
@@ -251,23 +142,23 @@ void onesf(int num){
 
  if(num!=0){
 	switch(num) {
-		  case 1:  printf("One\n");
+		  case 1:  printf("One ");
   break;
-		  case 2:  printf("Two\n");
+		  case 2:  printf("Two ");
   break;
-		  case 3:  printf("Three\n");
+		  case 3:  printf("Three ");
   break;
-		  case 4:  printf("Four\n");
+		  case 4:  printf("Four ");
   break;
-		  case 5:  printf("Five\n");
+		  case 5:  printf("Five ");
   break;
-		  case 6:  printf("Six\n");
+		  case 6:  printf("Six ");
   break;
-		  case 7:  printf("Seven\n");
+		  case 7:  printf("Seven ");
   break;
-		  case 8:  printf("Eight\n");
+		  case 8:  printf("Eight ");
   break;
-		  case 9:  printf("Nine\n");
+		  case 9:  printf("Nine ");
   break;
   
 	 }
