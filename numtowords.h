@@ -16,11 +16,11 @@ void ty(int );
 void tens1f(int );
 void onesf(int );
 
-void main(){
+void numtowordsmain(){
 	 int a,b,c,d,e;
 	 int ones=66, tens=66, hund=66, thou=66, thou2=66, hthou=66, mil=66; 
 	 int n;
-	 printf("Enter the number: (Max. 5 digits) \n");
+	 printf("Enter the number: (Max. 1000000 / one million) \n");
 	 scanf("%d",&n);
 	 if(n<=1000000){
 	 	//modulo gives the rightmost number. we will start to divide the input number with the ones place

@@ -29,7 +29,7 @@ int getlast(nd ** );
 
 
 
-main(){
+void wordstonummain(){
 	nd *head=NULL, *temp;
 		
 	char input[256],  inputcopy[256],  word[20],  result[20];;

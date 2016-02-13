@@ -1,4 +1,14 @@
+/*
+Author: Christine Mae Juruena
+Date Created: Feb 12, 2015
+Description: Accepts two arguments: the first argument is the number in word form 
+(from zero to 1 million) and the second argument is any of the following: JPY, 
+PHP, USD. The function returns the number in words to its numerical 
+form with a prefix of the  currency
 
+Ex input: ‘one thousand two hundred thirty four’, ‘USD’
+Answer USD 1234
+*/
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,10 +1,13 @@
 /*
 Author: Christine Mae Juruena
 Date Created: Feb 12, 2015
-Description: Accepts a number in word form (from zero to 1 million) and returns it in 
-numerical form. Input must be in lowercase.
-smple input: one thousand two hundred thirty four
-output: 1234
+Description: Accepts two arguments: the first argument is the number in word form 
+(from zero to 1 million) and the second argument is any of the following: JPY, 
+PHP, USD. The function returns the number in words to its numerical 
+form with a prefix of the  currency
+
+Ex input: ‘one thousand two hundred thirty four’, ‘USD’
+Answer USD 1234
 */
 
 #include <stdio.h>
@@ -23,19 +26,16 @@ void  insert(nd **, nd *, char);
 void display(nd *);
 int zerotonine ( char[] );
 int checkty(char[]);
-void deletenode(nd **);
-int getlast(nd ** );
 
 
 
-
-main(){
-	nd *head=NULL, *temp;
+void wordstocurrmain(){
+	nd *head=NULL	, *temp;
 		
 	char input[256],  inputcopy[256],  word[20],  result[20];;
 	int jump, cnt, numofDigits;
 	char delim, *a, * token;
-	char wordcopy[20], tempword[20], dashed[20], prev[20];
+	char wordcopy[20], tempword[20], dashed[20], prev[20], currency[10];
 	int numdash;
 
 	 	// ------
@@ -47,9 +47,13 @@ main(){
 		fgets(input, sizeof(input), stdin);
 		input[ strlen(input) - 1 ] = '\0';
 		strncpy ( inputcopy, input, 256);
-		
-		a = strtok (input," -");
-		strncpy( word, a, 20);
+		printf("enter currency (JPY, UsD, PHP): ");
+		fgets(currency, sizeof(currency), stdin);
+		currency[ strlen(currency) - 1 ] = '\0';
+		printf("%s ", currency );
+
+		  a = strtok (input," -");
+		 strncpy( word, a, 20);
 		
 
 		 while(a!=NULL	){
@@ -68,7 +72,6 @@ main(){
 		 	}else{
 		 		//if word is not thousand, hundred or million, it finds it in the fucntion 
 		 		// zero to nine and returns its equivalent digit 
-		 		
 
 		 		if (numofDigits>1)	hundthouone =1;
 		 		num = zerotonine(word);
@@ -118,28 +121,13 @@ main(){
 			
 			
 			for (a = 0; a < times; a++){
-				insert(&head, temp, 0);	
-				numofDigits++;	 			 										
+				insert(&head, temp, 0);				
 			}	 	
 		}
-		//checks of 1001 801 or the like, if the number has zeroes between it
-		if ( strcmp (prev, "hundred") == 0 || strcmp (prev, "thousand") == 0 ){
-			int b, x, tempnum;
-			tempnum = getlast(&head);
 
-			deletenode(&head);
-			if (strcmp (prev, "thousand") == 0 ) x=2;
-		 	if (strcmp (prev, "hundred") == 0 ) x=1;
-		 	for (b= 0;b < x; b++){
-				insert(&head, temp, 0);
-				numofDigits++;	 			 			
-		 	}	
-			insert(&head, temp, tempnum);	
-		}
 		//checks of last word ends in -ty
 		if ( checkty(word) == 1 ||  (checkty(word) == 1 && strcmp (prev, "hundred") == 0)){
-			insert(&head, temp, 0);	
-			numofDigits++;	 			 			
+			insert(&head, temp, 0);				
 		}		
 		display(head);
 		printf("\n\n");			
@@ -251,39 +239,4 @@ void insert(nd **pHead, nd *temp, char num){
 			p -> next = temp;
 	
 	}		
-}
-
-
-
-void deletenode(nd ** pHead)
-{
-    nd * prev = NULL;
-    nd * current = *pHead;
-
-    while(current->next != NULL)
-    {
-        prev = current;
-        current = current->next;
-    }
-
-    free (current);
-
-    if (prev != NULL)
-    {
-        prev->next = NULL;
-    }
-}
-
-int getlast(nd ** pHead)
-{
-    nd * prev = NULL;
-    nd * current = *pHead;
-
-    while(current->next != NULL)
-    {
-        prev = current;
-        current = current->next;
-    }
-
-    return current->x;
 }

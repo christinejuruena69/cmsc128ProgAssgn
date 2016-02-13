@@ -26,7 +26,7 @@ int count(const char*);
 void  insert(nd **, nd *, char);
 void display(nd *);
 
-main(){
+void delimmain(){
 	nd *head=NULL, *temp;
 		
 	char input[256];
