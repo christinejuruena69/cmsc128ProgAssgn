@@ -29,5 +29,6 @@ int menu(){
 
 	printf("\nYour choice: ");
 	scanf("%d",&choice);
+	getchar();
 	return choice;
 }

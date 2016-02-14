@@ -28,6 +28,7 @@ int count(const char*);
 //delims
 void  insert(nd **, nd *, char);
 void display(nd *);
+void displayDELIM(nd *);
 
 // wordstocurr
 int zerotonine ( char[] );
@@ -59,9 +60,11 @@ void delimmain(){
 	 // getchar();
 	 printf("Enter delmiter: ");
 	 scanf("%c", &delim);
-	 // getchar();
+	 // if ((delim>=0 || delim<=32 )) || (delim>=65 || delim<=90) || (delim>=65 || delim<=90)  )
+	 getchar();
 	 printf("Enter character jumps: ");
 	 scanf("%d", &jump);
+	 getchar();	 
 	 cnt = count(input); //counts number of charcters
 	 
 	int i;
@@ -73,8 +76,8 @@ void delimmain(){
 	    }
 	    
 	}
-	printf("Result: \n");
-	display(head);
+	printf("Number delimited: ");
+	displayDELIM(head);
 		
 	free(head);
 	printf("\n\n");
@@ -97,16 +100,17 @@ void wordstocurrmain(){
 		printf("enter words :  ");
 
 		fgets(input, sizeof(input), stdin);
-		
+
 		// int c;
 // while ( (c==getchar()) != EOF && c != '\n') { }
 
 		input[ strlen(input) - 1 ] = '\0';
+		// printf("input: %s\n",input );
 		strncpy ( inputcopy, input, 256);
-		printf("enter currency (JPY, UsD, PHP): ");
+		printf("enter currency (JPY, USD, PHP): ");
 		fgets(currency, sizeof(currency), stdin);
 		currency[ strlen(currency) - 1 ] = '\0';
-		printf("%s ", currency );
+		printf("\nThe number is: %s ", currency );
 
 		  a = strtok (input," -");
 		 strncpy( word, a, 20);
@@ -179,12 +183,29 @@ void wordstocurrmain(){
 				insert(&head, temp, 0);				
 			}	 	
 		}
+		//checks of 1001 801 or the like, if the number has zeroes between it
+		
+		if ( strcmp (prev, "hundred") == 0 || strcmp (prev, "thousand") == 0 ){
+			int b, x, tempnum;
+			tempnum = getlast(&head);
+
+			deletenode(&head);
+			if (strcmp (prev, "thousand") == 0 ) x=2;
+		 	if (strcmp (prev, "hundred") == 0 ) x=1;
+		 	for (b= 0;b < x; b++){
+				insert(&head, temp, 0);
+				numofDigits++;	 			 			
+		 	}	
+			insert(&head, temp, tempnum);	
+		}
 
 		//checks of last word ends in -ty
 		if ( checkty(word) == 1 ||  (checkty(word) == 1 && strcmp (prev, "hundred") == 0)){
 			insert(&head, temp, 0);				
-		}		
+		}	
+		// printf("heeyy\n");	
 		display(head);
+		// printf("youuuu\n");
 		printf("\n\n");			
 		free(head);
 	
@@ -197,26 +218,28 @@ void numtowordsmain(){
 	 int n;
 	 printf("Enter the number without comma or space: (Max. 1000000 / One Million digits) \n");
 	 scanf("%d",&n);
+	 getchar();
+	 printf("In words: ");
 	 if(n<=1000000){
 	 	//modulo gives the rightmost number. we will start to divide the input number with the ones place
 	 	// to check if the number has a result. that is, it is != null. 
 	 	//if the number is less than 1, the result will be zero
-	 		ones=n%10;
-		  n=n/10;
-		  tens=n%10;
-		  n=n/10;
-		  hund=n%10;
-		  n=n/10;
-		  thou=n%10;
-		  n=n/10;
-		  thou2=n%10; 
-		  n=n/10;
-		  hthou=n%10; 
-		  n=n/10;
-		  mil=n%10; 
+	 	ones=n%10;
+		n=n/10;
+		tens=n%10;
+		n=n/10;
+		hund=n%10;
+		n=n/10;
+		thou=n%10;
+		n=n/10;
+		thou2=n%10; 
+		n=n/10;
+		hthou=n%10; 
+		n=n/10;
+		mil=n%10; 
 		  if (mil == 1 && ( ones == 0 && tens == 0 && hund == 0 && thou == 0 && thou2 == 0  && hthou == 0  )){
   				//filters if equals to 1 million 
-  				printf("One Million");
+  				printf("one million");
   				exit(0);
 		  }else if( mil != 0 && ( ones != 0 || tens != 0 || hund != 0 || thou != 0 || thou2 != 0  || hthou != 0  )){
 	 				//checks if number exceeded the proper input 
@@ -226,21 +249,21 @@ void numtowordsmain(){
 
 		  if(hthou!=66 && hthou!=0){
 			   onesf(hthou);
-			   printf("Hundred ");
+			   printf("hundred ");
 		  }
 
 		  if(thou2==1) {
 		  	tens1f(thou);
-			   printf("Thousand ");		  	
+			   printf("thousand ");		  	
 		  }else{
 			  ty(thou2);
 			  onesf(thou);
-			  printf("Thousand ");
+			  printf("thousand ");
 		  }
 
 		  if (hund!=66 && hund!=0){
 			  onesf(hund);
-				printf("Hundred ");	  	
+				printf("hundred ");	  	
 		  }
 
 		  if(tens!=1){
@@ -301,7 +324,7 @@ void wordstonummain(){
 		 		//if word is not thousand, hundred or million, it finds it in the fucntion 
 		 		// zero to nine and returns its equivalent digit 
 		 		
-
+		 		// printf("word: %s\n",word );
 		 		if (numofDigits>1)	hundthouone =1;
 		 		num = zerotonine(word);
 		 		if ( num == 66){
@@ -371,7 +394,8 @@ void wordstonummain(){
 		if ( checkty(word) == 1 ||  (checkty(word) == 1 && strcmp (prev, "hundred") == 0)){
 			insert(&head, temp, 0);	
 			numofDigits++;	 			 			
-		}		
+		}
+		printf("\nThe number is: ");
 		display(head);
 		printf("\n\n");			
 		free(head);
@@ -395,13 +419,25 @@ int count(const char* str)
 void display(nd *head){
 	nd *temp = head;
 	
-	printf("\nThe contents are: ");
 
 	//prints contest while temp is not at the end of file
 	// while(temp->next != NULL ){
 	
 	while(temp!=NULL){
-		printf("%c ", temp->x);
+		printf("%d", temp->x);
+		temp = temp->next;
+	}
+	putchar('\n');
+}
+void displayDELIM(nd *head){
+	nd *temp = head;
+	
+
+	//prints contest while temp is not at the end of file
+	// while(temp->next != NULL ){
+	
+	while(temp!=NULL){
+		printf("%c", temp->x);
 		temp = temp->next;
 	}
 	putchar('\n');
@@ -497,21 +533,21 @@ int zerotonine ( char word[] ){
 //fxn for -ty
 void ty(int num){
 	 switch(num) {
-	 case 2: printf("Twenty ");
+	 case 2: printf("twenty ");
   break;
-	 case 3: printf("Thirty ");
+	 case 3: printf("thirty ");
   break;
-	 case 4: printf("Forty ");
+	 case 4: printf("forty ");
   break;
-	 case 5: printf("Fifty ");
+	 case 5: printf("fifty ");
   break;
-	 case 6: printf("Sixty ");
+	 case 6: printf("sixty ");
   break;
-	 case 7: printf("Seventy ");
+	 case 7: printf("seventy ");
   break;
-	 case 8: printf("Eighty ");
+	 case 8: printf("eighty ");
   break;
-	 case 9: printf("Ninety ");
+	 case 9: printf("ninety ");
   break;
   
 	}
@@ -520,25 +556,25 @@ void ty(int num){
 
 void tens1f(int num){
 	switch(num) {
-		case 0: printf("Ten ");
+		case 0: printf("ten ");
 	  break;
-			 case 1: printf("Eleven ");
+			 case 1: printf("eleven ");
 	  break;
-			 case 2: printf("Twelve ");
+			 case 2: printf("twelve ");
 	  break;
-			 case 3: printf("Thirteen ");
+			 case 3: printf("thirteen ");
 	  break;
-			 case 4: printf("Fourteen ");
+			 case 4: printf("fourteen ");
 	  break;
-			 case 5: printf("Fifteen ");
+			 case 5: printf("fifteen ");
 	  break;
-			 case 6: printf("Sixteen ");
+			 case 6: printf("sixteen ");
 	  break;
-			 case 7: printf("Seventeen ");
+			 case 7: printf("seventeen ");
 	  break;
-			 case 8: printf("Eighteen ");
+			 case 8: printf("eighteen ");
 	  break;
-			 case 9: printf("Nineteen ");
+			 case 9: printf("nineteen ");
 	  break;
   
 	}
@@ -547,23 +583,23 @@ void onesf(int num){
 
  if(num!=0){
 	switch(num) {
-		  case 1:  printf("One ");
+		  case 1:  printf("one ");
   break;
-		  case 2:  printf("Two ");
+		  case 2:  printf("two ");
   break;
-		  case 3:  printf("Three ");
+		  case 3:  printf("three ");
   break;
-		  case 4:  printf("Four ");
+		  case 4:  printf("four ");
   break;
-		  case 5:  printf("Five ");
+		  case 5:  printf("five ");
   break;
-		  case 6:  printf("Six ");
+		  case 6:  printf("six ");
   break;
-		  case 7:  printf("Seven ");
+		  case 7:  printf("seven ");
   break;
-		  case 8:  printf("Eight ");
+		  case 8:  printf("eight ");
   break;
-		  case 9:  printf("Nine ");
+		  case 9:  printf("nine ");
   break;
   
 	 }
